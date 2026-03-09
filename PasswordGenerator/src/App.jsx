@@ -1,62 +1,45 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [length, setLength] = useState(8)
-  const [charAllowed,setcharAllowed] = useState(false)
-  const [numAllowed,setnumAllowed] = useState(false)
-  const [password,setpassword] = useState("")
-  // const passwordRef=useRef(null)
-  const passwordRef = useRef(null)
-
-  const passwordGenerator=useCallback(()=>{
-    let pass=""
-    let str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    if (numAllowed) str+="0123456789"
-    if(charAllowed) str+="!~`#$%^&*_-=+"
-    
-    for (let i = 1; i < length; i++) {
-      let char=Math.floor(Math.random()*str.length+1 )
-      pass+= str.charAt(char)
-    }
-  setpassword(pass)
-
-  },[length,numAllowed,charAllowed,setpassword])
+  const [length, setlength] = useState(8)
+  const [number, setnumber] = useState(false)
+  const [char, setchar] = useState(false)
+  const [input, setinput] = useState("")
   
-  const passcopy=useCallback(()=>{
-    passwordRef.current?.select()
-    window.navigator.clipboard.writeText(password)
-  },[password])
-  useEffect(()=>{
-    passwordGenerator()
-  },[length,numAllowed,charAllowed,passwordGenerator])
+const passwordGenerator=()=>{
+   
+         const password=useCallback(()=>{
 
+          let pass=""
+          let letter="abcdedfhijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+          if(number) letter+="1234567890"
+         if(char)letter+="!@#$%^&*(),/"
+         for (let i = 0; i < length; i++) {
+           let char=Math.floor(Math.random()*letter.length+1)
+             pass=letter.at(char)
+         }
+        setinput(pass)
+         
+         },[char,length,number,setinput])
+}
   return (
-    <>
-      <h1 className='text-5xl my-14 text-white'>Password Generator</h1>
-     <div  className='w-full max-w-md mx-auto shaow-md rounded-lg px-4 my-8 text-orange-500 bg-gray-800'>
-       <h1 className='text-white text-center'>Password generator</h1>
-       <div className='flex shadow rounded-lg overflow-hidden mb-4'>
-        <input type="text" ref={passwordRef} value={password} className='outline-none w-full py-1 px-3 bg-amber-50' placeholder='password' readOnly/>
-        <button className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0' onClick={passcopy}>copy</button>
-       </div>
-       <div className='flex text-sm gap-x-2'>
-        <div className=' flex items-center gap-x-1'>
-         <input type='range'min={6} max={100} value={length} className='cursor-pointer' onChange={(e)=>{setLength(e.target.value)}}/> 
-         <label >Length:{ length} </label></div>
-        <div className=' flex items-center gap-x-1'>
-          <input type="checkbox" defaultChecked={numAllowed} id="numberInput" onChange={()=>{setnumAllowed((prev =>!prev))}}/>
-         <label htmlFor='numberInput' >Numbers</label>
-
-        </div><div className=' flex items-center gap-x-1'>
-          <input type="checkbox" defaultChecked={charAllowed} id="charInput" onChange={()=>{setcharAllowed((prev =>!prev))}}/>
-         <label htmlFor='charInput' >Characters</label>
-
-        </div>
-         </div></div>
-    </>
+    
+     <div className='  absolute w-screen h-screen bg-black flex flex-col pt-40 px-120 '>
+      <h1 className='text-4xl  text-white '>Password Generator</h1>
+    <div className='w-100 h-50 bg-gray-400 mt-10 rounded-2xl'>
+      <div className='mt-3 mx-6'><input className='bg-white h-8 w-70 m-2 p-2' type='text' placeholder='Password'></input>
+      <button className='bg-orange-400 p-1.5 w-14 rounded-xl '>copy</button></div>
+      <div>
+        <input className='mt-3 mx-7' type="range" /><label>length(2)</label>
+        <div className='mx-7 mt-4'><div><input type="checkbox" /><label htmlFor="number">Number</label></div>
+        <div><input type="checkbox" /><label htmlFor="number">Characters</label></div></div>
+      </div>
+    </div>
+    </div>
+    
   )
 }
 
