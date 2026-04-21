@@ -28,7 +28,7 @@ const passwordGenerator=()=>{
   return (
     
      <div className='  absolute w-screen h-screen bg-black flex flex-col pt-40 px-120 '>
-      <h1 className='text-4xl  text-white '>Password Generator</h1>
+      <h1 className='text-4xl  text-white '>String Generator</h1>
     <div className='w-100 h-50 bg-gray-400 mt-10 rounded-2xl'>
       <div className='mt-3 mx-6'><input className='bg-white h-8 w-70 m-2 p-2' type='text' placeholder='Password'></input>
       <button className='bg-orange-400 p-1.5 w-14 rounded-xl '>copy</button></div>
