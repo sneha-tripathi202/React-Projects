@@ -3,17 +3,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import RandomStringGenerator from './RandomStringGenerator'
 
 function App() {
-  const [count, setCount] = useState(0)
-   const funtion=async()=>{
-  let response=  await fetch("https://github.com/sneha-tripathi202")
-  console.log(response);
   
-   }
   return (
     <>
-     
+     <RandomStringGenerator/>
     </>
   )
 }
